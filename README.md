@@ -3,11 +3,11 @@
 По результатам сравнения возвращается рандомная gif в зависимости от просадки курса, его роста или стабильности.
 #
 Использованы следующие технологии:
--Gradle;
--Java corretto-11;
--Spring boot 2.7.0;
--Openfeign;
--Thymeleaf.
+#-Gradle;
+#-Java corretto-11;
+#-Spring boot 2.7.0;
+#-Openfeign;
+#-Thymeleaf.
 
 Все запросы приходят на HTTP endpoin
 Приложение построено на архитектуре MVC
