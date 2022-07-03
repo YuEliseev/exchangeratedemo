@@ -3,12 +3,14 @@ package ru.eliseev.exchangeratedemo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import ru.eliseev.exchangeratedemo.accessingdatajpa.RatesRepository;
 import ru.eliseev.exchangeratedemo.accessingdatajpa.entity.Request;
+import ru.eliseev.exchangeratedemo.accessingdatajpa.entity.User;
 import ru.eliseev.exchangeratedemo.model.GifDTO;
 import ru.eliseev.exchangeratedemo.service.ApplicationService;
 
@@ -21,6 +23,15 @@ public class ApplicationController {
     private ApplicationService applicationService;
     @Autowired
     private RatesRepository ratesRepository;
+
+
+    @GetMapping("/")
+    public ModelAndView greeting(){
+        ModelAndView modelAndView = new ModelAndView();
+        Map<String, Object> model = modelAndView.getModel();
+        modelAndView.setViewName("greeting");
+        return modelAndView;
+    }
 
     @GetMapping("/demo")
     public ModelAndView demo(){
@@ -39,4 +50,19 @@ public class ApplicationController {
     public @ResponseBody Iterable<Request> history(){
         return ratesRepository.findAll();
     }
+
+    @GetMapping("/registration")
+    public ModelAndView registration() {
+        ModelAndView modelAndView = new ModelAndView();
+        Map<String, Object> model = modelAndView.getModel();
+        modelAndView.setViewName("registration");
+        return modelAndView;
+    }
+
+    @PostMapping("/registration")
+    public String addUser (User user){
+
+        return "redirect:/login";
+    }
 }
+//TODO 15:18 need registration controller
