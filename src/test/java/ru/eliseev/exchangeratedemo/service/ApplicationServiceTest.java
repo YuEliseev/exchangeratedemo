@@ -15,8 +15,8 @@ import ru.eliseev.exchangeratedemo.ExchangeRateDemoApplication;
 import ru.eliseev.exchangeratedemo.clients.GifClient;
 import ru.eliseev.exchangeratedemo.clients.RatesClient;
 import ru.eliseev.exchangeratedemo.config.ApplicationConfig;
-import ru.eliseev.exchangeratedemo.model.GifDTO;
-import ru.eliseev.exchangeratedemo.model.RatesDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.GifDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.RatesDTO;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

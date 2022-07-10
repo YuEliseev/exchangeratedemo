@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ru.eliseev.exchangeratedemo.model.RatesDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.RatesDTO;
 
 @Service
 @FeignClient(name = "rates-client", url = "${client.ratesUrl}")

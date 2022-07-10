@@ -1,4 +1,4 @@
-package ru.eliseev.exchangeratedemo.model;
+package ru.eliseev.exchangeratedemo.model.DTO;
 
 import lombok.Data;
 

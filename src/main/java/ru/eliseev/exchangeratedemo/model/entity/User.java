@@ -1,11 +1,8 @@
-package ru.eliseev.exchangeratedemo.accessingdatajpa.entity;
+package ru.eliseev.exchangeratedemo.model.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
@@ -18,12 +15,13 @@ public class User {
 
     @Id
     private UUID id;
-    private String userName;
+    private String username;
     private String password;
     private boolean active;
 
-    public User(String userName, String userPassword, boolean active, Set<Role> role) {
-        this.userName = userName;
+    public User(String username, String userPassword, boolean active, Set<Role> role) {
+        this.id = UUID.randomUUID();
+        this.username = username;
         this.password = userPassword;
         this.active = active;
         this.role = role;

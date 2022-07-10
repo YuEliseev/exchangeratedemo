@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import ru.eliseev.exchangeratedemo.accessingdatajpa.RatesRepository;
-import ru.eliseev.exchangeratedemo.accessingdatajpa.entity.Request;
-import ru.eliseev.exchangeratedemo.accessingdatajpa.entity.User;
-import ru.eliseev.exchangeratedemo.model.GifDTO;
+import ru.eliseev.exchangeratedemo.accessingdatajpa.UserRepository;
+import ru.eliseev.exchangeratedemo.model.entity.Request;
+import ru.eliseev.exchangeratedemo.model.entity.Role;
+import ru.eliseev.exchangeratedemo.model.entity.User;
+import ru.eliseev.exchangeratedemo.model.DTO.GifDTO;
 import ru.eliseev.exchangeratedemo.service.ApplicationService;
 
+import javax.servlet.ServletException;
+import java.util.Collections;
 import java.util.Map;
 
 @Controller
@@ -23,6 +26,8 @@ public class ApplicationController {
     private ApplicationService applicationService;
     @Autowired
     private RatesRepository ratesRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/")
@@ -60,9 +65,17 @@ public class ApplicationController {
     }
 
     @PostMapping("/registration")
-    public String addUser (User user){
-
-        return "redirect:/login";
+        public ModelAndView addUser(User user) throws ServletException {
+        ModelAndView modelAndView = new ModelAndView();
+        User dbUser = userRepository.findByUsername(user.getUsername());
+        Map<String, Object> model = modelAndView.getModel();
+        if (dbUser != null){
+            throw new ServletException();
+        }else{
+            user.setActive(true);
+            user.setRole(Collections.singleton(Role.USER));
+            userRepository.save(new User(user.getUsername(), user.getPassword(), user.isActive(), user.getRole()));
+        }
+        return modelAndView;
     }
 }
-//TODO 15:18 need registration controller
