@@ -9,5 +9,10 @@
 <h1>Lets see today`s currency rates</h1>
 <p th:text="'Today we are ' + ${tag} + '!'" />
 <img th:src="@{${gifUrl}}"/>
+
+<p>Click <a th:href="@{/history}">here</a> to see a request history.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

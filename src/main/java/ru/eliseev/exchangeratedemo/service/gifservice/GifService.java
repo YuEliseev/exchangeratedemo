@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ru.eliseev.exchangeratedemo.clients.GifClient;
 import ru.eliseev.exchangeratedemo.config.ApplicationConfig;
-import ru.eliseev.exchangeratedemo.model.GifDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.GifDTO;
 
 import java.util.Map;
 

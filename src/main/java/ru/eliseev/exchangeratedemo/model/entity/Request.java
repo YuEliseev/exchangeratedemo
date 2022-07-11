@@ -1,4 +1,4 @@
-package ru.eliseev.exchangeratedemo.accessingdatajpa.entity;
+package ru.eliseev.exchangeratedemo.model.entity;
 
 import lombok.Getter;
 
@@ -13,7 +13,6 @@ import java.util.UUID;
 public class Request {
     @Id
     private UUID id;
-
     private LocalDate date;
     private LocalDate comparingDate;
     private String symbols;

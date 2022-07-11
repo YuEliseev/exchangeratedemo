@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ru.eliseev.exchangeratedemo.clients.RatesClient;
 import ru.eliseev.exchangeratedemo.config.ApplicationConfig;
-import ru.eliseev.exchangeratedemo.model.RatesDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.RatesDTO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

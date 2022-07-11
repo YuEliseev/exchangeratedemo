@@ -3,7 +3,7 @@ package ru.eliseev.exchangeratedemo.service.gifservice;
 import org.springframework.http.ResponseEntity;
 import org.thymeleaf.util.StringUtils;
 
-import ru.eliseev.exchangeratedemo.model.GifDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.GifDTO;
 
 import java.util.Map;
 

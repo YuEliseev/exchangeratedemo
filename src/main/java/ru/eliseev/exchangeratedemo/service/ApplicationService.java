@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ru.eliseev.exchangeratedemo.accessingdatajpa.RatesRepository;
-import ru.eliseev.exchangeratedemo.accessingdatajpa.entity.Request;
+import ru.eliseev.exchangeratedemo.model.entity.Request;
 import ru.eliseev.exchangeratedemo.config.ApplicationConfig;
-import ru.eliseev.exchangeratedemo.model.GifDTO;
-import ru.eliseev.exchangeratedemo.model.RatesDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.GifDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.RatesDTO;
 import ru.eliseev.exchangeratedemo.service.gifservice.GifService;
 import ru.eliseev.exchangeratedemo.service.ratesservice.RatesService;
 
