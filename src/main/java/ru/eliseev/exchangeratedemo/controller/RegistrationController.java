@@ -21,40 +21,10 @@ import java.util.Map;
 
 @Controller
 @RestController
-public class ApplicationController {
-    @Autowired
-    private ApplicationService applicationService;
-    @Autowired
-    private RatesRepository ratesRepository;
+public class RegistrationController {
+
     @Autowired
     private UserRepository userRepository;
-
-
-    @GetMapping("/")
-    public ModelAndView greeting(){
-        ModelAndView modelAndView = new ModelAndView();
-        Map<String, Object> model = modelAndView.getModel();
-        modelAndView.setViewName("greeting");
-        return modelAndView;
-    }
-
-    @GetMapping("/demo")
-    public ModelAndView demo(){
-        ModelAndView modelAndView = new ModelAndView();
-        GifDTO gifByCurrency = applicationService.getGifByCurrency();
-        Map<String, Object> model = modelAndView.getModel();
-        model.put("gifUrl", gifByCurrency.getUrl());
-        model.put("gifWidth", gifByCurrency.getWidth());
-        model.put("gifHeight", gifByCurrency.getHeight());
-        model.put("tag", gifByCurrency.getTag());
-        modelAndView.setViewName("demo");
-        return modelAndView;
-    }
-
-    @GetMapping("/history")
-    public @ResponseBody Iterable<Request> history(){
-        return ratesRepository.findAll();
-    }
 
     @GetMapping("/registration")
     public ModelAndView registration() {
@@ -65,7 +35,7 @@ public class ApplicationController {
     }
 
     @PostMapping("/registration")
-        public ModelAndView addUser(User user) throws ServletException {
+    public ModelAndView addUser(User user) throws ServletException {
         ModelAndView modelAndView = new ModelAndView();
         User dbUser = userRepository.findByUsername(user.getUsername());
         Map<String, Object> model = modelAndView.getModel();
