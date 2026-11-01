@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import ru.eliseev.exchangeratedemo.clients.RatesClient;
 import ru.eliseev.exchangeratedemo.config.ApplicationConfig;
 import ru.eliseev.exchangeratedemo.model.DTO.RatesDTO;
+import ru.eliseev.exchangeratedemo.model.DTO.records.CurrencyResponse;
+import ru.eliseev.exchangeratedemo.service.RabbitCurrencyService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,9 +22,16 @@ public class RatesService {
     @Autowired
     private RatesClient ratesClient;
 
+    private final RabbitCurrencyService rabbitCurrencyService;
+
+    public RatesService(RabbitCurrencyService rabbitCurrencyService) {
+        this.rabbitCurrencyService = rabbitCurrencyService;
+    }
+
     public RatesDTO getLatestRates() {
 
-        ResponseEntity<RatesDTO> latestRatesResponse = ratesClient.getLatestRates(applicationConfig.getAppId(), applicationConfig.getSymbols());
+        ResponseEntity<RatesDTO> latestRatesResponse = ratesClient.getLatestRates(applicationConfig.getAppId(),
+                applicationConfig.getSymbols());
         if (HttpStatus.OK.equals(latestRatesResponse.getStatusCode())) {
             return latestRatesResponse.getBody();
         }
@@ -34,11 +44,21 @@ public class RatesService {
         today = today.minusDays(applicationConfig.getComparisonDate());
         String date = formatter.format(today);
 
-        ResponseEntity<RatesDTO> yesterdayRatesResponse = ratesClient.getYesterdayRates(date, applicationConfig.getAppId(), applicationConfig.getSymbols());
+        ResponseEntity<RatesDTO> yesterdayRatesResponse = ratesClient.getYesterdayRates(date,
+                applicationConfig.getAppId(),
+                applicationConfig.getSymbols());
 
         if (HttpStatus.OK.equals(yesterdayRatesResponse.getStatusCode())) {
             return yesterdayRatesResponse.getBody();
         }
         throw new IllegalArgumentException("Status code was not 200 OK" + yesterdayRatesResponse.getStatusCodeValue());
+    }
+
+    public BigDecimal getRateViaQuarkus(String currency, String date) {
+        CurrencyResponse response = rabbitCurrencyService.getRateFromQuarkus(currency, date);
+        if (response == null || response.rate() == null) {
+            throw new RuntimeException("Не удалось получить курс для " + currency);
+        }
+        return BigDecimal.valueOf(response.rate());
     }
 }

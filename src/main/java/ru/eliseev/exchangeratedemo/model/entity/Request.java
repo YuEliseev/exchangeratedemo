@@ -19,7 +19,11 @@ public class Request {
     private BigDecimal latestRates;
     private BigDecimal comparingRate;
 
-    public Request(LocalDate date, LocalDate comparingDate, String symbols, BigDecimal latestRates, BigDecimal comparingRate) {
+    public Request(LocalDate date,
+                   LocalDate comparingDate,
+                   String symbols,
+                   BigDecimal latestRates,
+                   BigDecimal comparingRate) {
         this.id = UUID.randomUUID();
         this.date = date;
         this.comparingDate = comparingDate;
@@ -30,7 +34,12 @@ public class Request {
 
     @Override
     public String toString() {
-        return String.format("Request [id = '%d', date = '%s', comparingDate = '%s', symbols = '%s', latestRates = '%d', comparingRate = '%d']",
+        return String.format("Request [id = '%d'," +
+                        " date = '%s'," +
+                        " comparingDate = '%s'," +
+                        " symbols = '%s'," +
+                        " latestRates = '%d'," +
+                        " comparingRate = '%d']",
                 id, date.toString(), comparingDate.toString(), symbols, latestRates, comparingRate);
     }
 

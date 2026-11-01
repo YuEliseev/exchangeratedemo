@@ -30,20 +30,24 @@ public class ApplicationService {
     BigDecimal yesterdayRate;
 
     public GifDTO getGifByCurrency() {
+        String currency = applicationConfig.getSymbols();
+        BigDecimal yesterdayRate = ratesService.getRateViaQuarkus(currency, "2026-10-19"); // Передаем конкретную дату
+        BigDecimal latestRate = ratesService.getRateViaQuarkus(currency, null);
+//        RatesDTO latestRates = ratesService.getLatestRates();
+//        RatesDTO yesterdayRates = ratesService.getYesterdayRates();
+//
+//        latestRate = latestRates.getRates().get(applicationConfig.getSymbols());
+//        yesterdayRate = yesterdayRates.getRates().get(applicationConfig.getSymbols());
 
-        RatesDTO latestRates = ratesService.getLatestRates();
-        RatesDTO yesterdayRates = ratesService.getYesterdayRates();
-
-        latestRate = latestRates.getRates().get(applicationConfig.getSymbols());
-        yesterdayRate = yesterdayRates.getRates().get(applicationConfig.getSymbols());
-
-        if (ObjectUtils.firstNonNull(latestRate, yesterdayRate) == null){
-            throw new IllegalArgumentException("Where some null values from rates service: Latest rate - " + latestRate
-                    + " , yesterday rate - " + yesterdayRate);
+        if (ObjectUtils.firstNonNull(latestRate, yesterdayRate) == null) {
+            throw new IllegalArgumentException("Where some null values from rates service: Latest rate - "
+                    + latestRate
+                    + " , yesterday rate - "
+                    + yesterdayRate);
         }
         String tag;
 
-        switch (yesterdayRate.compareTo(latestRate)){
+        switch (yesterdayRate.compareTo(latestRate)) {
             case (1):
                 tag = applicationConfig.getTagRich();
                 break;
